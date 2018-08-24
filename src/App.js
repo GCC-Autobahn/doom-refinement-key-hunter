@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
-import ReactDataGrid from 'react-data-grid';
 
 import doomBanner from './images/doom_hunter_banner.png';
 import doomLogo from './images/doom_hunter_logo.png';
+import teamLogo from './images/dread_pirate_roberts_w.png';
 
 import { Grid, GridColumn as Column } from '@progress/kendo-react-grid';
-import { process } from '@progress/kendo-data-query';
 import { MultiSelect } from '@progress/kendo-react-dropdowns';
 import '@progress/kendo-theme-default/dist/all.css';
 
@@ -50,8 +48,9 @@ class App extends Component {
       <div>
         <div className="App-header" style={{backgroundImage: `url(${doomBanner})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
           <img src={doomLogo} alt="logo" style={{ height: '140px', alignself: 'center' }}/>
-          <h1 className="App-title">DOOM</h1>
-          <span>Refinement Key Hunter</span>
+          <img src={teamLogo} alt="logo" style={{ alignself: 'end', position: 'absolute', right: '20px', height: '115px', top: '15px', opacity: '.2' }}/>
+          {/* <h1 className="App-title">DOOM</h1>
+          <span>Refinement Key Hunter</span> */}
         </div>
 
         <div className="master">
@@ -68,7 +67,13 @@ class App extends Component {
                         //   [ { text: `hello`, data: [ ...value ] } ] : [] } 
                           />
 
-            {/* <input type="text" placeholder="Enter category" value={this.state.term} onChange={ this.handleChange.bind(this) }/> */}
+            {/* <input style={{ flex: '0 0 100%', alignSelf: 'stretch', display: 'flex', marginBottom: '10px', height: '30px'}}
+                   type="text" readOnly='true' value={this.state.term} /> */}
+            <span style={{flex: '1 1 auto', alignSelf: 'start', color: '#fff'}}>Choice Tag</span>
+            <div style={{ flex: '1 0 auto', alignSelf: 'stretch', flexDirection: 'row', display: 'flex', padding: '10px', borderStyle: 'solid', borderColor: 'rgba(0,0,0,.08)', borderWidth: '1px', borderBottomWidth:'0px', backgroundColor:'#ccc', marginBottom: '10px'}}>
+              
+              <span style={{flex: '1 1 auto', alignSelf: 'start'}}>{this.state.term}</span>
+            </div>
           
             
 
@@ -77,7 +82,7 @@ class App extends Component {
             {/* <a  style={{alignSelf: 'end'}} href={'https://www.homedepot.com/b/N-' + this.state.term} target='_blank'>View</a> */}
           </div>
           <Grid style={{ height: '400px', flex: '1 1 auto', alignSelf: 'stretch', display: 'flex' }}
-                groupable={true}
+                groupable={true} sortable={true}
                 data={this.state.grdItemsSource}>
               <Column field="dimension" title="Category" width="250px" />
               <Column field="key" title="Name" width="250px" />
@@ -199,7 +204,8 @@ class App extends Component {
 
               grid_data.push({dimension: res.data.dimensions[i].label, key: key.label, value: key.refinementKey});
 
-              multi_data.push({key: res.data.dimensions[i].label + ": " + key.label, value: key.refinementKey});
+              // multi_data.push({key: res.data.dimensions[i].label + ": " + key.label, value: key.refinementKey});
+              multi_data.push({key: key.label, value: key.refinementKey});
             }
           }
 
