@@ -1,0 +1,30 @@
+{
+  "name": "refinement-key-extractor",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@progress/kendo-data-query": "^1.4.1",
+    "@progress/kendo-drawing": "^1.5.7",
+    "@progress/kendo-react-dateinputs": "^1.2.0",
+    "@progress/kendo-react-dropdowns": "^1.2.0",
+    "@progress/kendo-react-grid": "^1.2.0",
+    "@progress/kendo-react-inputs": "^1.2.0",
+    "@progress/kendo-react-intl": "^1.2.0",
+    "@progress/kendo-react-pdf": "^1.2.0",
+    "@progress/kendo-theme-default": "^2.55.0",
+    "ag-grid": "^18.1.2",
+    "ag-grid-react": "^18.1.0",
+    "axios": "^0.18.0",
+    "react": "^16.4.2",
+    "react-data-grid": "^4.0.8",
+    "react-dom": "^16.4.2",
+    "react-dom-factories": "^1.0.2",
+    "react-scripts": "1.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
