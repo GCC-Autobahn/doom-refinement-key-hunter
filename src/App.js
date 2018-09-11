@@ -12,6 +12,15 @@ import '@progress/kendo-theme-default/dist/all.css';
 
 const categories = [
   { key: "Lawn & Garden", value: "5yc1vZbx6k" },
+  { key: "Outdoors", value: "5yc1vZbx82" },
+  { key: "Storage & Organization", value:"5yc1vZas7e"},
+  { key: "Closet Storage & Organization", value:"5yc1vZc1x1"},
+  { key: "Closet Storage & Organization / Shoe Storage", value:"5yc1vZc89c"},
+  { key: "Shoe Storage", value:"5yc1vZc1jw"},
+  { key: "Dimmers", value:"5yc1vZc34i"},
+  { key: "Ants", value:"5yc1vZbx4wZ1z17e6w"},
+  { key: "Dimmers", value:"5yc1vZc7cc"},
+  
 ];
 
 class App extends Component {
@@ -27,8 +36,8 @@ class App extends Component {
         grdItemsSource: [],
         products: [],
         search: [],
-        value: [],
-        term: "5yc1vZbx4w",
+        value: "",
+        term: "",
         group: [ { field: "Category"}],
         columnDefs: [
             {headerName: "Name", field: "key"},
@@ -57,23 +66,24 @@ class App extends Component {
 
           {/* <span style={{flex: '1 1 auto', alignSelf: 'start', marginLeft: '3px', color: "#fff"}}>Enter search keys below</span> */}
 
-          <MultiSelect style={{ flex: '0 0 100%', alignSelf: 'stretch', display: 'flex', width: '100%', marginBottom: '10px'}} placeholder='Enter search terms...'
+          {/* <MultiSelect style={{ flex: '0 0 100%', alignSelf: 'stretch', display: 'flex', width: '100%', marginBottom: '10px'}} placeholder='Enter search terms...'
                         data={this.state.msItemsSource}
                         onChange={this.onSelectChange.bind(this)}
                         value={this.state.value}
                         textField="key"
                         dataItemKey="value"
-                        // tags={selected > 0 ?
-                        //   [ { text: `hello`, data: [ ...value ] } ] : [] } 
-                          />
+                          /> */}
 
             {/* <input style={{ flex: '0 0 100%', alignSelf: 'stretch', display: 'flex', marginBottom: '10px', height: '30px'}}
-                   type="text" readOnly='true' value={this.state.term} /> */}
-            <span style={{flex: '1 1 auto', alignSelf: 'start', color: '#fff'}}>Choice Tag</span>
+                   type="text" value={this.state.term} /> */}
+
+            <input type="text" placeholder="Enter refinement keys" value={this.state.term} onChange={ this.handleChange.bind(this) } style={{ flex: '0 0 100%', alignSelf: 'stretch', display: 'flex', marginBottom: '10px', height: '30px'}}/>
+
+            {/* <span style={{flex: '1 1 auto', alignSelf: 'start', color: '#fff'}}>Choice Tag</span>
             <div style={{ flex: '1 0 auto', alignSelf: 'stretch', flexDirection: 'row', display: 'flex', padding: '10px', borderStyle: 'solid', borderColor: 'rgba(0,0,0,.08)', borderWidth: '1px', borderBottomWidth:'0px', backgroundColor:'#ccc', marginBottom: '10px'}}>
               
               <span style={{flex: '1 1 auto', alignSelf: 'start'}}>{this.state.term}</span>
-            </div>
+            </div> */}
           
             
 
@@ -160,7 +170,7 @@ class App extends Component {
 
     let list = [{value: e.target.value}];
 
-    this.setState({ search: list, term: e.target.value });
+    this.setState({ search: list, term: e.target.value, value: e.target.value }, this.searchKeys);
   }
 
   onClick(){
@@ -172,22 +182,22 @@ class App extends Component {
 
     if(this.state.value && this.state.value.length > 0) {
 
-      let search = "";
+      // let search = "";
 
-      for(var i = 0; i < this.state.value.length; i++) {
+      // for(var i = 0; i < this.state.value.length; i++) {
 
-        if(i > 0) {
+      //   if(i > 0) {
         
-          search += 'Z';
-        }
+      //     search += 'Z';
+      //   }
 
-        search += this.state.value[i].value;
-      }
+      //   search += this.state.value[i].value;
+      // }
 
-      this.setState({ term: search });
+      //this.setState({ term: search });
 
-      // axios.get('http://origin-api.gcp-prod.homedepot.com/SearchNav/v2/search?type=json&navparam=5yc1vZbx4w&storeid=123&show=dimensions').then(res => {
-        axios.get(`http://origin-api.gcp-prod.homedepot.com/SearchNav/v2/search?type=json&navparam=${search}&storeid=123&show=dimensions`).then(res => {
+      axios.get(`http://origin-api.gcp-prod.homedepot.com/SearchNav/v2/search?type=json&navparam=${this.state.value}&storeid=123&show=dimensions`).then(res => {
+        // axios.get(`http://origin-api.gcp-prod.homedepot.com/SearchNav/v2/search?type=json&navparam=${search}&storeid=123&show=dimensions`).then(res => {
         
         let grid_data = [];
         let multi_data = [];
@@ -217,7 +227,7 @@ class App extends Component {
       }).catch(err => { console.log(err)});
 
 
-      axios.get(`http://origin-api.gcp-prod.homedepot.com/SearchNav/v2/search/?type=json&show=searchreport,skus&navparam=${search}`).then(res => {
+      axios.get(`http://origin-api.gcp-prod.homedepot.com/SearchNav/v2/search/?type=json&show=searchreport,skus&navparam=${this.state.value}`).then(res => {
         
         let grid_data = [];
         let product_count;
