@@ -196,7 +196,8 @@ class App extends Component {
 
       //this.setState({ term: search });
 
-      axios.get(`http://origin-api.gcp-prod.homedepot.com/SearchNav/v2/search?type=json&navparam=${this.state.value}&storeid=123&show=dimensions`).then(res => {
+      axios.get(`http://api.homedepot.com/v2/catalog/search?key=ZDpG4SI7RdBmvgS76DdIfXNBsXQle7f2&type=json&navparam=${this.state.value}&show=dimensions`).then(res => {
+      // axios.get(`http://origin-api.gcp-prod.homedepot.com/SearchNav/v2/search?type=json&navparam=${this.state.value}&storeid=123&show=dimensions`).then(res => {
         // axios.get(`http://origin-api.gcp-prod.homedepot.com/SearchNav/v2/search?type=json&navparam=${search}&storeid=123&show=dimensions`).then(res => {
         
         let grid_data = [];
@@ -227,7 +228,8 @@ class App extends Component {
       }).catch(err => { console.log(err)});
 
 
-      axios.get(`http://origin-api.gcp-prod.homedepot.com/SearchNav/v2/search/?type=json&show=searchreport,skus&navparam=${this.state.value}`).then(res => {
+      axios.get(`http://api.homedepot.com/v2/catalog/search?key=ZDpG4SI7RdBmvgS76DdIfXNBsXQle7f2&type=json&navparam=${this.state.value}&show=searchreport,skus`).then(res => {
+      // axios.get(`http://origin-api.gcp-prod.homedepot.com/SearchNav/v2/search/?type=json&show=searchreport,skus&navparam=${this.state.value}`).then(res => {
         
         let grid_data = [];
         let product_count;
